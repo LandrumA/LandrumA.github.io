@@ -19,7 +19,7 @@ export default function Projects() {
       description:
         "Working on interpretable severity-level classification of dysarthric speech using wav2vec2, MFCC, Whisper. Goal: interpretability and fusion of acoustic embeddings.",
       tech: ["Deep learning", "Whisper", "Wav2Vec2", "MFCC"],
-      image: 'dysarthriaImg', // placeholder: no crash, no image shown
+      image: dysarthriaImg, 
     },
     {
       title: "Transmission Line Fault Location via Laplace Modeling",
