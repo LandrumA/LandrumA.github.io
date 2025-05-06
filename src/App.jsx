@@ -1,6 +1,8 @@
 import { Canvas } from '@react-three/fiber';
 import CoffeeBackground from './CoffeeBackground';
 import Projects from './Projects';
+import AboutAndContact from './AboutAndContact';
+
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -70,6 +72,7 @@ function App() {
 
         {/* Modular Projects Component */}
         <Projects />
+        <AboutAndContact />
       </main>
     </>
   );

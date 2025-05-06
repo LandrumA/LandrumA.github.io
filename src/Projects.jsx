@@ -1,10 +1,9 @@
 import ProjectCard from './ProjectCard';
 import rhdImg from './images/rhd.png';
-//import dysarthriaImg from './images/dysarthria.png';
+// dysarthriaImg import is skipped on purpose
 import tlineImg from './images/tline.png';
 import lpSolverImg from './images/lp_solver.png';
 import wassersteinImg from './images/wasserstein.png';
-
 
 export default function Projects() {
   const projects = [
@@ -20,14 +19,14 @@ export default function Projects() {
       description:
         "Working on interpretable severity-level classification of dysarthric speech using wav2vec2, MFCC, Whisper. Goal: interpretability and fusion of acoustic embeddings.",
       tech: ["Deep learning", "Whisper", "Wav2Vec2", "MFCC"],
-      image: dysarthriaImg,
+      image: '', // placeholder: no crash, no image shown
     },
     {
       title: "Transmission Line Fault Location via Laplace Modeling",
       description:
         "Derived a model using Laplace transforms and Kirchhoff's Laws to estimate fault positions on transmission lines. Report includes original proofs and full derivations.",
       tech: ["Laplace", "Kirchhoff", "signal modeling", "applied math"],
-      image: tlineImg ,
+      image: tlineImg,
     },
     {
       title: "Linear Programming Game Solver",
@@ -41,7 +40,7 @@ export default function Projects() {
       description:
         "Used optimal transport and the POT library to interpolate between MNIST digits and visualize barycenters in the Wasserstein space.",
       tech: ["Optimal transport", "POT", "MNIST", "Python"],
-      image: lpSolverImg,
+      image: wassersteinImg,
     },
   ];
 
@@ -73,7 +72,6 @@ export default function Projects() {
         {projects.map((proj, idx) => (
             <ProjectCard key={idx} {...proj} />
         ))}
-
       </div>
     </section>
   );
