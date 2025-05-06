@@ -1,6 +1,6 @@
 import ProjectCard from './ProjectCard';
 import rhdImg from './images/rhd.png';
-// dysarthriaImg import is skipped on purpose
+import dysarthriaImg from './images/dysarthria.png';
 import tlineImg from './images/tline.png';
 import lpSolverImg from './images/lp_solver.png';
 import wassersteinImg from './images/wasserstein.png';
@@ -19,7 +19,7 @@ export default function Projects() {
       description:
         "Working on interpretable severity-level classification of dysarthric speech using wav2vec2, MFCC, Whisper. Goal: interpretability and fusion of acoustic embeddings.",
       tech: ["Deep learning", "Whisper", "Wav2Vec2", "MFCC"],
-      image: '', // placeholder: no crash, no image shown
+      image: 'dysarthriaImg', // placeholder: no crash, no image shown
     },
     {
       title: "Transmission Line Fault Location via Laplace Modeling",
