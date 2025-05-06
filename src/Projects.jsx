@@ -1,6 +1,6 @@
 import ProjectCard from './ProjectCard';
 import rhdImg from './images/rhd.png';
-import dysarthriaImg from './images/dysarthria.png';
+//import dysarthriaImg from './images/dysarthria.png';
 import tlineImg from './images/tline.png';
 import lpSolverImg from './images/lp_solver.png';
 import wassersteinImg from './images/wasserstein.png';
