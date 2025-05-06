@@ -1,95 +1,46 @@
-import { Canvas } from '@react-three/fiber';
-import MathBackground from './MathBackground';
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
-export default function AboutAndContact() {
+export default function MathBackground() {
+  const groupRef = useRef();
+
+  // Create a huge parametric square-style mesh
+  const curves = [...Array(80)].map((_, i) => {
+    const points = [];
+    const a = 1 + i * 0.04;
+    const b = 2 + i * 0.035;
+    const delta = i * 0.1;
+
+    for (let t = 0; t < Math.PI * 2; t += 0.02) {
+      const radius = 25; // MASSIVE scaling
+      const x = Math.sin(a * t + delta) * radius;
+      const y = Math.sin(b * t) * radius;
+      points.push(new THREE.Vector3(x, y, 0));
+    }
+
+    return new THREE.BufferGeometry().setFromPoints(points);
+  });
+
+  // Gentle slow rotation
+  useFrame(({ clock }) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.z = clock.elapsedTime * 0.015;
+    }
+  });
+
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      {/* Background Canvas */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: -1,
-          overflow: 'hidden',
-          pointerEvents: 'none',
-        }}
-      >
-        <Canvas
-          gl={{ alpha: true }}
-          style={{ width: '100%', height: '100%' }}
-          camera={{ position: [0, 0, 5], fov: 45 }}
-        >
-          <MathBackground />
-        </Canvas>
-      </div>
-
-      {/* Foreground Content */}
-      <section
-        style={{
-          padding: '4rem 1rem',
-          minHeight: '100vh',
-          backgroundColor: 'transparent',
-          fontFamily: '"IBM Plex Mono", monospace',
-          color: '#000',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <h2
-            style={{
-              fontSize: '2rem',
-              marginBottom: '2rem',
-              borderBottom: '1px solid #ccc',
-              paddingBottom: '0.5rem',
-              textAlign: 'center',
-            }}
-          >
-            About Me
-          </h2>
-
-          <p style={{ marginBottom: '2rem', lineHeight: '1.6' }}>
-            I'm Landrum Anderson, a mathematics undergraduate with a concentration in computer science,
-            specializing in machine learning and theoretical systems. My work focuses on interpretable
-            speech classification, mathematical modeling, and optimization. I strive to build systems that are
-            both rigorous and usable — blending theory with application.
-          </p>
-
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Contact</h3>
-
-          <p style={{ marginBottom: '0.25rem' }}>
-            Email: <a href="mailto:andersonl54@lsus.edu" style={{ color: '#0055cc' }}>andersonl54@lsus.edu</a>
-          </p>
-          <p style={{ marginBottom: '0.25rem' }}>
-            GitHub: <a href="https://github.com/LandrumA" target="_blank" rel="noopener noreferrer" style={{ color: '#0055cc' }}>
-              github.com/LandrumA
-            </a>
-          </p>
-          <p style={{ marginBottom: '1.5rem' }}>
-            LinkedIn: <a href="https://www.linkedin.com/in/landrum-anderson" target="_blank" rel="noopener noreferrer" style={{ color: '#0055cc' }}>
-              linkedin.com/in/landrum-anderson
-            </a>
-          </p>
-
-          <a
-            href="/resume.pdf"
-            download
-            style={{
-              display: 'inline-block',
-              padding: '0.5rem 1rem',
-              border: '1px solid #0055cc',
-              borderRadius: '4px',
-              color: '#0055cc',
-              textDecoration: 'none',
-              transition: 'all 0.2s ease',
-            }}
-            onMouseOver={e => (e.target.style.backgroundColor = '#eef6ff')}
-            onMouseOut={e => (e.target.style.backgroundColor = 'transparent')}
-          >
-            Download My Résumé (PDF)
-          </a>
-        </div>
-      </section>
-    </div>
+    <group ref={groupRef} scale={[3.5, 3.5, 1]}>
+      {curves.map((geo, idx) => (
+        <line key={idx} geometry={geo}>
+          <lineBasicMaterial
+            attach="material"
+            color={new THREE.Color(0x4e342e).offsetHSL(0, 0, idx * 0.002)}
+            transparent
+            opacity={0.06 + (idx % 6) * 0.015}
+          />
+        </line>
+      ))}
+    </group>
   );
 }

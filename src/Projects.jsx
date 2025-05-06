@@ -50,7 +50,7 @@ export default function Projects() {
         width: '100%',
         backgroundColor: '#ffffff',
         color: '#000',
-        padding: '4rem 1rem',
+        padding: '8rem 1rem', // HEAVILY INCREASED VERTICAL HEIGHT
         fontFamily: '"IBM Plex Mono", monospace',
         position: 'relative',
         zIndex: 1,
@@ -60,7 +60,7 @@ export default function Projects() {
         <h2
           style={{
             fontSize: '2rem',
-            marginBottom: '2rem',
+            marginBottom: '3rem',
             borderBottom: '1px solid #ccc',
             paddingBottom: '0.5rem',
             textAlign: 'center',
@@ -70,7 +70,9 @@ export default function Projects() {
         </h2>
 
         {projects.map((proj, idx) => (
-            <ProjectCard key={idx} {...proj} />
+          <div key={idx} style={{ marginBottom: '3rem' }}>
+            <ProjectCard {...proj} />
+          </div>
         ))}
       </div>
     </section>
